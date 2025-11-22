@@ -1,0 +1,21 @@
+.navbar {
+  height: 60px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 18px;
+  color: var(--text);
+}
+
+.user-box {
+  padding: 6px 14px;
+  background: var(--primary);
+  color: white;
+  border-radius: 6px;
+}

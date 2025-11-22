@@ -1,0 +1,55 @@
+.sidebar {
+  height: 100vh;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  transition: width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.sidebar.open {
+  width: 220px;
+}
+
+.sidebar.closed {
+  width: 70px;
+}
+
+.toggle-btn {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.menu {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--surface);
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background: var(--primary-light);
+  color: white;
+}
+
+.icon {
+  font-size: 20px;
+}
