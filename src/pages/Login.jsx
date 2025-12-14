@@ -1,42 +1,63 @@
-import { useState, useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import "./Login.css";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import "./login.css"; // ajuste o caminho se necessário
 
 export default function Login() {
-  const { login } = useContext(AuthContext);
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [erro, setErro] = useState("");
 
-  async function handleSubmit(e) {
+  async function handleLogin(e) {
     e.preventDefault();
-    await login(email, senha);
+    setErro("");
+
+    try {
+      const usuario = await login(email, senha);
+
+      // 🔥 Rota dinâmica baseada no setor
+      const setor = usuario.setor.toLowerCase();
+      const destino = `/${setor}/inicio`;
+
+      navigate(destino, { replace: true });
+    } catch (err) {
+      setErro("Usuário ou senha inválidos.");
+    }
   }
 
   return (
     <div className="login-wrapper">
       <div className="login-card">
-        <h2 className="login-title">Acesso ao Sistema</h2>
 
-        <form onSubmit={handleSubmit} className="login-form">
+        <h1 className="login-title">Acesso ao Sistema</h1>
+
+        {erro && <p className="login-error">{erro}</p>}
+
+        <form className="login-form" onSubmit={handleLogin}>
+
           <label>E-mail</label>
           <input
-            type="email"
+            type="text"
             value={email}
-            placeholder="Digite seu e-mail"
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Digite seu e-mail"
           />
 
           <label>Senha</label>
           <input
             type="password"
             value={senha}
-            placeholder="Digite sua senha"
             onChange={(e) => setSenha(e.target.value)}
+            placeholder="Digite sua senha"
           />
 
           <button type="submit" className="login-btn">
             Entrar
           </button>
+
         </form>
       </div>
     </div>

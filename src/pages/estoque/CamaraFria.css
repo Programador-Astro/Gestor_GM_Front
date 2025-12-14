@@ -1,0 +1,50 @@
+.producao-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Tabela */
+.producao-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #333; /* garante que tudo é legível */
+}
+
+.producao-table th {
+  padding: 12px;
+  border-bottom: 2px solid #ddd;
+  text-align: left;
+  background: #f5f5f5;
+  color: #333; /* cabeçalho legível */
+  font-weight: bold;
+}
+
+.producao-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  color: #333; /* texto padrão */
+}
+
+/* Linha destacada para produções do dia */
+.linha-hoje {
+  background: #e8f0fe; /* azul leve do Google */
+  font-weight: 600;
+}
+
+/* Status pendente */
+.status-pendente {
+  color: #d93025; /* vermelho Google */
+  font-weight: bold;
+}
+
+/* Nenhum dado */
+.no-data {
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  color: #555; /* cinza claro */
+  opacity: 0.8;
+}

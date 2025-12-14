@@ -1,0 +1,255 @@
+/* =========================================================
+   🎨 THEME / DESIGN SYSTEM
+   ========================================================= */
+:root {
+  --bg: #f5f7fa;
+  --card: #ffffff;
+
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+
+  --secondary: #e2e8f0;
+  --secondary-hover: #cbd5e1;
+
+  --danger: #dc2626;
+  --muted: #64748b;
+  --text-dark: #1e293b;
+
+  --sidebar-bg: #111827;
+  --sidebar-hover: #1f2937;
+
+  --radius: 12px;
+
+  /* Status Colors */
+  --status-draft-bg: #fef3c7;
+  --status-draft-color: #b45309;
+  --status-finished-bg: #d1fae5;
+  --status-finished-color: #065f46;
+  --status-pending-bg: #e0e7ff;
+  --status-pending-color: #3730a3;
+  --status-checked-bg: #bbf7d0;
+  --status-checked-color: #166534;
+}
+
+/* =========================================================
+   🧱 LAYOUT BASE
+   ========================================================= */
+.layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* Sidebar já usa seu próprio CSS */
+
+/* Conteúdo principal */
+.content {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+  transition: width 0.25s ease;
+}
+
+.sidebar.closed ~ .content {
+  width: calc(100% - 70px);
+}
+
+.sidebar.open ~ .content {
+  width: calc(100% - 250px);
+}
+
+/* A área real de conteúdo */
+.page-content {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* =========================================================
+   🏷 TITLES & TEXT
+   ========================================================= */
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 25px 0 15px 0;
+}
+
+/* =========================================================
+   🔘 BUTTONS
+   ========================================================= */
+.btn {
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+}
+.btn-secondary:hover {
+  background: var(--secondary-hover);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+
+/* =========================================================
+   🗂 PRODUÇÃO — Cards
+   ========================================================= */
+.lista-producao {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 15px;
+}
+
+.card-producao {
+  background: var(--card);
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: 0.2s;
+}
+
+.card-clickable {
+  cursor: pointer;
+}
+.card-clickable:hover {
+  transform: translateY(-3px);
+  background: #f9fafb;
+}
+
+/* =========================================================
+   🏷 STATUS BADGES
+   ========================================================= */
+.status {
+  padding: 5px 10px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-rascunho {
+  background: var(--status-draft-bg);
+  color: var(--status-draft-color);
+}
+.status-finalizado {
+  background: var(--status-finished-bg);
+  color: var(--status-finished-color);
+}
+.status-aguardando_conf {
+  background: var(--status-pending-bg);
+  color: var(--status-pending-color);
+}
+.status-conferido {
+  background: var(--status-checked-bg);
+  color: var(--status-checked-color);
+}
+
+/* =========================================================
+   📊 GRÁFICO DE ESTOQUE
+   ========================================================= */
+.grafico-container {
+  background: var(--card);
+  padding: 22px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+  margin-top: 25px;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grafico-box {
+  width: 100%;
+  height: 350px;
+}
+
+/* =========================================================
+   🪟 MODAL
+   ========================================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+}
+
+.modal {
+  width: 420px;
+  background: white;
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+  animation: fadeIn 0.25s ease;
+}
+
+.modal input,
+.modal textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--secondary);
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+
+.modal textarea {
+  min-height: 90px;
+  resize: none;
+}
+
+.input-readonly {
+  background: #eef2f7;
+  cursor: not-allowed;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Animação */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* =========================================================
+   📱 RESPONSIVO
+   ========================================================= */
+@media (max-width: 900px) {
+  .page-content {
+    padding: 0 10px;
+  }
+  .grafico-box {
+    height: 320px;
+  }
+}
+
+@media (max-width: 500px) {
+  .modal {
+    width: 90%;
+  }
+}

@@ -1,23 +1,86 @@
-import { Routes, Route } from "react-router-dom";
-import Login from "./pages/Login.jsx";
-import DashboardLayout from "./layouts/DashboardLayout.jsx";
-import PrivateRoute from "./components/PrivateRoute.jsx";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-export default function RoutesApp() {
+import Login from "./pages/Login";
+import SecureRoute from "./components/SecureRoute";
+
+{/* PRODUCAO */}
+import ProducaoInicio from "./pages/producao/ProducaoInicio";
+import ProducaoEditar from "./pages/producao/ProducaoEditar";
+import CamaraFria from "./pages/estoque/CamaraFria";
+
+
+{/* Estoque */}
+import EstoqueInicio from "./pages/estoque/EstoqueInicio";
+import EntradaInsumos from "./pages/estoque/EntradaInsumos";
+import CamaraFriaEditar from "./pages/estoque/CamaraFriaEditar";
+
+
+
+export default function AppRoutes() {
   return (
     <Routes>
-      {/* Rota pública */}
+      
+      {/* Login */}
       <Route path="/login" element={<Login />} />
 
-      {/* Rotas privadas */}
+      {/* Root → Login */}
+      <Route path="/" element={<Navigate to="/login" replace />} />
+
+      {/* Produção */}
       <Route
-        path="/"
+        path="/producao/inicio"
         element={
-          <PrivateRoute>
-            <DashboardLayout />
-          </PrivateRoute>
+          <SecureRoute allowed={["PRODUCAO", "ADM"]}>
+            <ProducaoInicio />
+          </SecureRoute>
         }
       />
-    </Routes>
+      <Route
+        path="/producao/:id"
+        element={
+          <SecureRoute allowed={["PRODUCAO", "ADM"]}>
+            <ProducaoEditar />
+          </SecureRoute>
+        }
+      />
+
+
+
+            {/* Estoque */}
+      <Route path="estoque/" element={<Navigate to="inicio/" replace />} />
+      <Route
+        path="/Estoque/inicio"
+        element={
+          <SecureRoute allowed={["ESTOQUE", "ADM"]}>
+            <EstoqueInicio />
+          </SecureRoute>
+        }
+      />
+      <Route
+        path="/Estoque/Entrada"
+        element={
+          <SecureRoute allowed={["ESTOQUE", "ADM"]}>
+            <EntradaInsumos />
+          </SecureRoute>
+        }
+      />
+      <Route
+        path="/Estoque/camara-fria"
+        element={
+          <SecureRoute allowed={["ESTOQUE", "ADM"]}>
+            <CamaraFria/>
+          </SecureRoute>
+        }
+      />
+      <Route
+        path="/estoque/producao/:id"
+        element={
+          <SecureRoute allowed={["ESTOQUE", "ADM"]}>
+            <CamaraFriaEditar />
+          </SecureRoute>
+        }
+      />
+
+      </Routes>
   );
 }

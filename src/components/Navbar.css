@@ -1,21 +1,44 @@
+/* Navbar.css */
+
 .navbar {
-  height: 60px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
+    /* Fixa no topo, complementando a sidebar */
+    position: sticky;
+    top: 0;
+    z-index: 500; 
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: var(--card); /* Fundo claro */
+    color: var(--text-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .title {
-  font-size: 18px;
-  color: var(--text);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-dark);
+}
+
+.navbar-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }
 
 .user-box {
-  padding: 6px 14px;
-  background: var(--primary);
-  color: white;
-  border-radius: 6px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--secondary);
+    color: var(--text-dark);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.user-box:hover {
+    background: var(--secondary-hover);
 }

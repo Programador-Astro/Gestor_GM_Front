@@ -1,0 +1,541 @@
+/* ===================================================================
+   PRODUCAO EDITAR — CSS FINAL (UNIFICAÇÃO + AJUSTES DE LEGIBILIDADE)
+   =================================================================== */
+
+/* ------------------------------
+   DESIGN TOKENS
+------------------------------ */
+:root {
+  /* Cores base */
+  --bg: #f8fafc;
+  --card: #fff;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --secondary: #6b7280;
+  --secondary-hover: #4b5563;
+  --danger: #dc2626;
+  --success: #22c55e;
+
+  /* Texto e Borda */
+  --text-dark: #1f2937; /* Escuro, mas mais suave que preto total */
+  --text-heading: #000; /* 🔥 Títulos em preto puro para alto contraste */
+  --muted: #6b7280;
+  --border-light: #e5e7eb;
+
+  /* Chips */
+  --chip-ok-bg: #ecfdf5;
+  --chip-ok-color: #065f46; /* Verde escuro para legibilidade */
+  --chip-div-bg: #fff7ed;
+  --chip-div-color: #9a3412; /* Laranja escuro para legibilidade */
+  --chip-pend-bg: #f3f4f6;
+  --chip-pend-color: var(--muted);
+
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================================
+   ESTRUTURA GLOBAL
+========================================================= */
+
+body {
+  font-family: 'Inter', sans-serif; /* Adicione uma fonte moderna */
+  color: var(--text-dark);
+}
+
+.editar-root {
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+}
+
+.content-main {
+  flex: 1;
+  margin-left: 230px;
+  transition: margin-left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Seletor de Sidebar não fornecido no JSX, mantendo o padrão */
+.sidebar.closed ~ .content-main {
+  margin-left: 70px;
+}
+
+.editar-container {
+  max-width: 1300px; /* Aumentado ligeiramente o max-width */
+  margin: 30px auto 40px auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+/* =========================================================
+   TOPBAR E BOTÕES
+========================================================= */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.logo {
+  height: 36px;
+  object-fit: contain;
+}
+
+.top-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* --- Botões --- */
+.btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap; /* Evita quebra de linha em botões pequenos */
+}
+
+.btn.small {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: var(--secondary);
+  border: 1px solid var(--border-light);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e5e7eb;
+  color: var(--secondary-hover);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   INFORMAÇÕES GERAIS DA PRODUÇÃO
+========================================================= */
+
+.producao-info h1 {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+  color: var(--text-heading); /* 🔥 PRETO */
+  font-weight: 800;
+}
+
+.meta {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin: 10px 0 20px 0;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.meta strong {
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+/* Status geral da Produção */
+.status {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.status.finalizado {
+  background: var(--success);
+  color: white;
+}
+
+.status.aguardando_conf {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.alert {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fef3c7; /* Amarelo claro */
+  color: #92400e; /* Marrom escuro */
+  border: 1px solid #fde68a;
+  border-left: 4px solid #f59e0b; /* Borda lateral de destaque */
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   LISTA DE ITENS — CARDS
+========================================================= */
+
+.itens-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--text-heading); /* 🔥 PRETO */
+  font-weight: 800;
+}
+
+.itens-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Responsivo flexível */
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.item-card {
+  background: var(--card);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.item-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #d1d5db;
+}
+
+.item-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item-title {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+}
+
+.item-title strong {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+/* Chips de Status do Item */
+.chip {
+  padding: 4px 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.chip.ok { background: var(--chip-ok-bg); color: var(--chip-ok-color); }
+.chip.divergente { background: var(--chip-div-bg); color: var(--chip-div-color); }
+.chip.pendente { background: var(--chip-pend-bg); color: var(--chip-pend-color); }
+
+/* =========================================================
+   CAMPOS DE CONTAGEM DENTRO DO CARD
+========================================================= */
+
+.item-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas: Planejado, Produção, Câmara */
+  gap: 15px;
+  align-items: flex-end; /* Alinha o input com os valores */
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  padding: 6px 0;
+  background-color: #f9fafb; /* Fundo leve para destaque */
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid var(--border-light);
+}
+
+.input-camara {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 2px solid var(--border-light);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary); /* Destaca a entrada do usuário */
+  text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-camara:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.input-camara:disabled {
+  background-color: #f3f4f6;
+  color: var(--muted);
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+/* Feedback de Auto-Save */
+.small-note {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 4px;
+  text-align: right; /* Alinha a nota com o input */
+}
+
+.small-note.saved { 
+  color: var(--success); 
+  font-weight: 600;
+}
+.small-note.saving { 
+  color: var(--primary); 
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.small-note.saving .spin {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+
+/* =========================================================
+   MODAL DE INSUMOS
+========================================================= */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: var(--card);
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 900px; /* Grande e centralizada */
+  max-height: 90vh;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transform: scale(1);
+  transition: transform 0.3s ease-out;
+}
+
+.modal-box h2 {
+  font-size: 2rem;
+  color: var(--text-heading);
+  font-weight: 800;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+/* Tabela de Insumos */
+.tabela-insumos {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Ajuda no layout de colunas */
+  overflow-y: auto; /* Adiciona scroll se a lista for longa */
+  max-height: calc(90vh - 200px); /* Altura máxima para caber na modal */
+}
+
+.tabela-insumos th,
+.tabela-insumos td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.tabela-insumos thead th {
+  background-color: #f9fafb;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 2px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tabela-insumos tbody tr {
+  border-bottom: 1px solid var(--border-light);
+  transition: background-color 0.1s ease;
+}
+
+.tabela-insumos tbody tr:last-child {
+  border-bottom: none;
+}
+
+.tabela-insumos tbody tr:hover {
+  background-color: #fefefe;
+}
+
+.tabela-insumos td input[type="number"] {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  font-size: 1rem;
+  width: 120px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.tabela-insumos td small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1200px) {
+  .itens-lista {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 950px) {
+  .modal-box {
+    max-width: 95%;
+  }
+
+  .tabela-insumos {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-main { 
+    margin-left: 0 !important; /* Ignora o margin da sidebar */
+  }
+
+  .topbar {
+    padding: 10px 15px;
+  }
+
+  .producao-info h1 {
+    font-size: 1.8rem;
+  }
+
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .itens-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .itens-lista { 
+    grid-template-columns: 1fr; /* Coluna única no mobile */
+  }
+
+  .item-card {
+    padding: 12px;
+  }
+
+  .item-row { 
+    grid-template-columns: repeat(3, 1fr); /* Mantém 3 colunas dentro do card */
+    gap: 10px;
+  }
+  
+  .modal-box h2 {
+    font-size: 1.5rem;
+  }
+  
+  .tabela-insumos {
+     display: block; /* Permite scroll horizontal na tabela */
+     width: 100%;
+     overflow-x: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .item-row { 
+    grid-template-columns: 1fr; /* 1 coluna por campo no mobile pequeno */
+  }
+  
+  .top-actions {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

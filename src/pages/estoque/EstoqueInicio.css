@@ -1,0 +1,185 @@
+/* ============================================
+   LAYOUT GERAL
+===============================================*/
+.estoque-layout {
+  display: flex;
+  background-color: #0f1624;
+  min-height: 100vh;
+}
+
+/* Conteúdo principal deslocado pela sidebar */
+.estoque-main {
+  flex: 1;
+  margin-left: 260px; 
+  padding: 25px 40px;
+  color: #fff;
+}
+
+.estoque-title {
+  margin: 25px 0;
+  font-size: 26px;
+  font-weight: 500;
+  color: #f1f1f1;
+}
+
+/* ============================================
+   CARDS DE ESTOQUE (INSUMOS / PRODUTOS)
+===============================================*/
+
+.cards-container {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.card-estoque {
+  background: #1b2433;
+  width: 380px;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, .45);
+}
+
+.card-estoque h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+/* Tabela */
+.card-estoque table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.card-estoque th {
+  background: #2a3550;
+  padding: 8px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.card-estoque td {
+  background: #1f2a40;
+  padding: 8px;
+  font-size: 14px;
+  border-bottom: 1px solid #2f3b56;
+}
+
+.card-estoque tr:hover td {
+  background: #27334a;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .estoque-main {
+    margin-left: 0;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-estoque {
+    width: 95%;
+  }
+}
+
+/* ============================================
+   PRODUÇÃO — CARROSSEL HORIZONTAL
+===============================================*/
+
+.producao-section {
+  margin: 25px 0;
+}
+
+.producao-section h2 {
+  color: #f1f1f1;
+  margin-bottom: 15px;
+}
+
+/* Carrossel dos cards */
+.cards-producao-container {
+  display: flex;
+  gap: 18px;
+  padding-bottom: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; 
+}
+
+.cards-producao-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card individual */
+.producao-card {
+  background: #181946;
+  min-width: 260px;
+  max-width: 260px;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.32);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+
+.producao-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+}
+
+/* Título do card */
+.producao-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* Status */
+.producao-status {
+  font-weight: 600;
+  margin: 6px 0;
+  color: #dcdcdc;
+}
+
+.status-pill {
+  background: #ffe39c;
+  color: #4b3a00;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 13px;
+}
+
+/* Observação */
+.producao-obs {
+  font-size: 14px;
+  color: #c9c9c9;
+  margin: 10px 0 15px 0;
+}
+
+/* Botão */
+.btn-atender {
+  background: #0077ff;
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-atender:hover {
+  background: #005fd1;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .producao-card {
+    min-width: 220px;
+  }
+}

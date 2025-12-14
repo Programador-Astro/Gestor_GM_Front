@@ -1,0 +1,69 @@
+.entrada-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px #00000010;
+}
+
+.nf-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.nf-box input {
+  margin-top: 6px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.entrada-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.entrada-table th,
+.entrada-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.entrada-table select,
+.entrada-table input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.btn-add {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.btn-submit {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-remove {
+  background: #d9534f;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}

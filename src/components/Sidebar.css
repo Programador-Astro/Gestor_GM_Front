@@ -1,55 +1,169 @@
+/* Sidebar.css */
+
+/* === VARIÁVEIS DE COR E LAYOUT ESSENCIAIS === */
+:root {
+  --bg: #f8fafc; /* light gray background */
+  --card: #fff;
+  --primary: #4f46e5; /* Indigo */
+  --primary-hover: #4338ca;
+  --secondary: #cbd5e1;
+  --danger: #dc2626;
+  --muted: #64748b;
+  --text-dark: #1e293b;
+
+  --sidebar-bg: #1f1f1f;
+  --sidebar-width-open: 230px;
+  --sidebar-width-closed: 70px;
+}
+
+/* === ESTRUTURA GLOBAL (Necessário para a Sidebar fixa) === */
+/* Sidebar.css (Ajuste) */
+
+/* ... (Variáveis de cor, etc. mantidas) ... */
+
+/* === ESTRUTURA GLOBAL (Ajuste crucial) === */
+.layout {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg);
+    /* Removido o flex para evitar interferências. O .content se ajusta. */
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* Margem para compensar a sidebar fixa */
+    margin-left: var(--sidebar-width-open); 
+    transition: margin-left 0.3s ease;
+    
+    /* Garante que o conteúdo ocupe todo o espaço horizontalmente */
+    width: 100%; 
+    min-width: 0; /* Impede overflow se a tela for muito pequena */
+}
+
+/* Quando a sidebar estiver fechada, o conteúdo se move para a esquerda */
+.sidebar.closed ~ .content {
+    margin-left: var(--sidebar-width-closed);
+}
+
+.page-content {
+    padding: 20px;
+    flex-grow: 1;
+    /* Adicionamos uma largura máxima para que o conteúdo não fique GRANDE demais em monitores ultra-wide */
+    /* Você pode ajustar ou remover o max-width dependendo da largura ideal do seu sistema. */
+    max-width: 1400px; /* Largura máxima, ex: 1400px ou '100%' para preenchimento total */
+    width: 100%; /* Ocupa 100% do espaço disponível no .content */
+    margin: 0 auto; /* Centraliza o conteúdo dentro da largura máxima */
+}
+
+/* Quando a sidebar estiver fechada, o conteúdo se move para a esquerda */
+.sidebar.closed ~ .content {
+    margin-left: var(--sidebar-width-closed);
+}
+
+
+/* === SIDEBAR COMPONENT === */
 .sidebar {
+  /* Fixa na tela */
+  position: fixed; 
+  top: 0;
+  left: 0;
+  
+  width: var(--sidebar-width-open);
+  background: var(--sidebar-bg);
+  color: white;
   height: 100vh;
-  background: var(--surface);
-  border-right: 1px solid var(--border);
   transition: width 0.3s ease;
   display: flex;
   flex-direction: column;
-  padding: 12px;
-}
-
-.sidebar.open {
-  width: 220px;
+  z-index: 1000;
+  overflow-y: auto; /* Permite rolar o menu se for longo */
+  padding-bottom: 20px; /* Espaço para o rodapé */
 }
 
 .sidebar.closed {
-  width: 70px;
+  width: var(--sidebar-width-closed);
+}
+
+/* === Topo e Botão Toggle === */
+.sidebar-top {
+  padding: 10px 10px 20px 10px; /* Mais espaço abaixo do botão */
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
 }
 
 .toggle-btn {
-  width: 100%;
-  padding: 8px;
-  border: none;
   background: var(--primary);
   color: white;
-  border-radius: 6px;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background 0.2s;
+  font-weight: bold;
 }
 
+.toggle-btn:hover {
+  background: var(--primary-hover);
+}
+
+/* === Menu de Navegação === */
 .menu {
-  margin-top: 20px;
+  padding: 0 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px; /* Espaçamento menor entre itens */
+  flex-grow: 1; /* Ocupa o espaço restante */
 }
 
 .menu-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px;
-  border-radius: 6px;
+  padding: 12px 10px;
+  background: transparent;
+  border-radius: 8px;
   text-decoration: none;
-  color: var(--text);
-  background: var(--surface);
-  transition: background 0.2s;
+  color: white;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap; 
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .menu-item:hover {
-  background: var(--primary-light);
-  color: white;
+  background: #2a2a2a;
+  color: var(--primary); /* Destaque sutil no hover */
+}
+
+/* Estado Ativo (para a rota atual) */
+.menu-item.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
+}
+.menu-item.active:hover {
+    background: var(--primary-hover);
 }
 
 .icon {
   font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* Esconde o label no modo fechado */
+.sidebar.closed .menu-item .label {
+    opacity: 0;
+    transition: opacity 0.1s;
+    width: 0;
+    padding: 0;
+}
+
+.menu-empty {
+  padding: 20px;
+  opacity: 0.5;
+  text-align: center;
 }
